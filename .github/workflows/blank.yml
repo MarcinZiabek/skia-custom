@@ -23,17 +23,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
       - name: Download Depot Tools
         run: git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
       - name: Set Depot Tools Path
-        run: echo "${PATH}"
-
-      - name: Set Depot Tools Path
         run: echo "${{ github.workspace }}/depot_tools" >> $GITHUB_PATH
-
-      - name: Set Depot Tools Path
-        run: echo "${PATH}"
 
       - name: Download Skia
         run: git clone https://github.com/google/skia.git --branch chrome/m119 --single-branch
@@ -41,5 +40,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          cd skia
+          python tools/git-sync-deps
+          
