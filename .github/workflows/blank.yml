@@ -23,7 +23,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
+      - name: Download Depot Tools
+        run: https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+      - name: Set Depot Tools Path
+        run: export PATH="${PWD}/depot_tools:${PATH}"
+
       - name: Download Skia
         run: git clone https://github.com/google/skia.git --branch chrome/m119 --single-branch
 
