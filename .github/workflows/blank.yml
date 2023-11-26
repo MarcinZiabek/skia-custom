@@ -32,10 +32,10 @@ jobs:
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
           echo "${{ github.workspace }}/depot_tools" >> $GITHUB_PATH
           export PATH="${PWD}/depot_tools:${PATH}"
+          bin/fetch-ninja
           git clone https://github.com/google/skia.git --branch chrome/m119 --single-branch
           cd skia
           python tools/git-sync-deps
-          ls -l bin
           bin/gn gen out/release --args="is_official_build=true is_component_build=true skia_use_system_expat=false skia_use_system_icu=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false extra_cflags_cc=[\"-frtti\"]"
           ninja -C out/release skia
           
