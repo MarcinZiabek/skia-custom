@@ -41,6 +41,8 @@ jobs:
         run: |
           cd skia
           python tools/git-sync-deps
+          ls -l
+          ls -l bin
 
       - name: Build Skia
         run: |
