@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Synchronize dependencies
+      - name: Build
         run: |
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
           echo "${{ github.workspace }}/depot_tools" >> $GITHUB_PATH
@@ -38,4 +38,11 @@ jobs:
           python tools/git-sync-deps
           bin/gn gen out/release --args="is_official_build=true is_component_build=true skia_use_system_expat=false skia_use_system_icu=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_use_system_harfbuzz=false skia_use_gl=false skia_use_vulcan=false skia_use_angle=false extra_cflags_cc=[\"-frtti\"]"
           ninja -C out/release skia
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build Package
+          path: |
+            out/release/
           
