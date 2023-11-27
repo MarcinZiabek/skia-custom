@@ -44,5 +44,5 @@ jobs:
         with:
           name: Build Package
           path: |
-            out/release/
+            skia/out/release/
           
