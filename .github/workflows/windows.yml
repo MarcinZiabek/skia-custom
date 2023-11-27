@@ -1,0 +1,50 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  main:
+    runs-on: ${{ matrix.environment }}
+    strategy:
+      matrix:
+        environment:
+          - windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Build
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          set PATH=%CD%\depot_tools;%PATH%
+          git clone https://github.com/google/skia.git --branch chrome/m119 --single-branch
+          cd skia
+          bin\fetch-ninja
+          python tools\git-sync-deps
+          bin\gn gen out\release --args="is_official_build=true is_component_build=true skia_use_system_expat=false skia_use_system_icu=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_use_system_harfbuzz=false skia_use_gl=false skia_use_vulcan=false skia_use_angle=false extra_cflags_cc=[\"-frtti\"]"
+          ninja -C out\release skia
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build Package
+          path: |
+            skia\out\release\
+          
