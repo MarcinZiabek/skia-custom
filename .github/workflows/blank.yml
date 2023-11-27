@@ -21,7 +21,6 @@ jobs:
         environment:
           - macos-latest
           - ubuntu-latest
-          - windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
