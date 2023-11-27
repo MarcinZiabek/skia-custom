@@ -33,7 +33,6 @@ jobs:
       - name: Build
         run: |
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-          set PATH=%CD%\depot_tools;%PATH%
           git clone https://github.com/google/skia.git --branch chrome/m119 --single-branch
           cd skia
           bin\fetch-ninja
