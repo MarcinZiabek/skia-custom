@@ -34,6 +34,7 @@ jobs:
         run: |
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
           git clone https://github.com/google/skia.git --branch chrome/m119 --single-branch
+          echo "${{ github.workspace }}/depot_tools" >> $GITHUB_PATH
           cd skia
           bin\fetch-ninja
           python tools\git-sync-deps
