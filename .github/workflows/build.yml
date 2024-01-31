@@ -24,7 +24,8 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Build
+      - name: Build Windows
+        if: matrix.environment == 'windows-latest'
         run: |
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
           echo "${{ github.workspace }}/depot_tools" >> $GITHUB_PATH
@@ -45,6 +46,30 @@ jobs:
             skia_use_system_harfbuzz=false"
           ninja -C out/release skia
         shell: bash  
+
+      - name: Build Linux and MacOS
+        if: matrix.environment != 'windows-latest'
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          echo "${{ github.workspace }}/depot_tools" >> $GITHUB_PATH
+          export PATH="${PWD}/depot_tools:${PATH}"
+          git clone https://github.com/google/skia.git --branch chrome/m121 --single-branch
+          cd skia
+          bin/fetch-ninja
+          python tools/git-sync-deps
+          bin/gn gen out/release --args=" \
+            is_debug=false \
+            is_official_build=true \
+            skia_use_system_expat=false \
+            skia_use_system_libjpeg_turbo=false \
+            skia_use_system_libpng=false \
+            skia_use_system_libwebp=false \
+            skia_use_system_zlib=false \
+            skia_use_system_icu=false \
+            skia_use_system_harfbuzz=false \
+            skia_use_gl=false"
+          ninja -C out/release skia
+        shell: bash    
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
