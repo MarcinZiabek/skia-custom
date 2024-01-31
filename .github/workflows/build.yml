@@ -43,7 +43,14 @@ jobs:
             skia_use_system_libwebp=false \
             skia_use_system_zlib=false \
             skia_use_system_icu=false \
-            skia_use_system_harfbuzz=false
+            skia_use_system_harfbuzz=false \
+            skia_enable_android_utils=false \
+            skia_enable_spirv_validation=false \
+            skia_enable_tools=false \
+            skia_enable_gpu_debug_layers=false \
+            skia_use_jpeg_gainmaps=false \
+            skia_use_libheif=false \
+            skia_use_lua=false \
             skia_use_gl=false"
           ninja -C out/release skia
         shell: bash  
