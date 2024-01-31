@@ -82,7 +82,11 @@ jobs:
             skia_use_libheif=false \
             skia_use_lua=false \
             skia_use_gl=false \
-            skia_use_icu4x=true"
+            skia_use_icu4x=true \
+            skia_use_libjpeg_turbo_decode=true \
+            skia_use_libjpeg_turbo_encode=true \
+            skia_use_libpng_encode=true
+            skia_use_libpng_decode=true"
           ninja -C out/release skia
         shell: bash    
 
