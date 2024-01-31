@@ -43,7 +43,12 @@ jobs:
             skia_use_system_libwebp=false \
             skia_use_system_zlib=false \
             skia_use_system_icu=false \
-            skia_use_system_harfbuzz=false"
+            skia_use_system_harfbuzz=false \
+            skia_use_fontconfig=true \
+            skia_enable_fontmgr_FontConfigInterface=false \
+            skia_use_freetype=true \
+            skia_use_harfbuzz=true \
+            skia_use_icu=true"
           ninja -C out/release skia
         shell: bash  
 
@@ -67,7 +72,11 @@ jobs:
             skia_use_system_zlib=false \
             skia_use_system_icu=false \
             skia_use_system_harfbuzz=false \
-            skia_use_gl=false"
+            skia_use_gl=false \
+            skia_use_fontconfig=true \
+            skia_use_freetype=true \
+            skia_use_harfbuzz=true \
+            skia_use_icu=true"
           ninja -C out/release skia
         shell: bash    
 
