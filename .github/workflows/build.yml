@@ -51,7 +51,8 @@ jobs:
             skia_use_jpeg_gainmaps=false \
             skia_use_libheif=false \
             skia_use_lua=false \
-            skia_use_gl=false"
+            skia_use_gl=false \
+            skia_use_webgl=false"
           ninja -C out/release skia
         shell: bash  
 
