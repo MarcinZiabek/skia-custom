@@ -37,6 +37,7 @@ jobs:
           bin/gn gen out/release --args=" \
             is_debug=false \
             is_official_build=true \
+            is_component_build=true \
             skia_use_system_expat=false \
             skia_use_system_libjpeg_turbo=false \
             skia_use_system_libpng=false \
@@ -65,6 +66,7 @@ jobs:
           bin/gn gen out/release --args=" \
             is_debug=false \
             is_official_build=true \
+            is_component_build=true \
             skia_use_system_expat=false \
             skia_use_system_libjpeg_turbo=false \
             skia_use_system_libpng=false \
@@ -72,11 +74,14 @@ jobs:
             skia_use_system_zlib=false \
             skia_use_system_icu=false \
             skia_use_system_harfbuzz=false \
-            skia_use_gl=false \
-            skia_use_fontconfig=true \
-            skia_use_freetype=true \
-            skia_use_harfbuzz=true \
-            skia_use_icu=true"
+            skia_enable_android_utils=false \
+            skia_enable_spirv_validation=false \
+            skia_enable_tools=false \
+            skia_enable_gpu_debug_layers=false \
+            skia_use_jpeg_gainmaps=false \
+            skia_use_libheif=false \
+            skia_use_lua=false \
+            skia_use_gl=false"
           ninja -C out/release skia
         shell: bash    
 
