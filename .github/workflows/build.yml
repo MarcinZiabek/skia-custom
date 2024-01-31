@@ -13,6 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         environment:
+          - macos-latest
+          - ubuntu-latest
           - windows-latest
 
     steps:
@@ -34,6 +36,7 @@ jobs:
           bin/gn gen out/release --args=" \
             is_debug=false \
             is_official_build=true \
+            is_component_build=true \
             skia_use_system_expat=false \
             skia_use_system_libjpeg_turbo=false \
             skia_use_system_libpng=false \
