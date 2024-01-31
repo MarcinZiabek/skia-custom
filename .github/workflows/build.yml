@@ -49,7 +49,7 @@ jobs:
             skia_enable_fontmgr_FontConfigInterface=false \
             skia_use_freetype=true \
             skia_use_harfbuzz=true \
-            skia_use_icu=true"
+            skia_use_icu4x=true"
           ninja -C out/release skia
         shell: bash  
 
@@ -81,7 +81,8 @@ jobs:
             skia_use_jpeg_gainmaps=false \
             skia_use_libheif=false \
             skia_use_lua=false \
-            skia_use_gl=false"
+            skia_use_gl=false \
+            skia_use_icu4x=true"
           ninja -C out/release skia
         shell: bash    
 
