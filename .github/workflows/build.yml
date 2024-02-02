@@ -64,7 +64,6 @@ jobs:
           bin/fetch-ninja
           python tools/git-sync-deps
           bin/gn gen out/release --args='
-            target_cpu="arm64"
             is_official_build=true
             is_component_build=false
             skia_enable_tools=true
