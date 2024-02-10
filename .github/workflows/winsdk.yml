@@ -23,5 +23,7 @@ jobs:
       - name: Build Windows
         if: matrix.environment == 'windows-latest'
         run: |
+          cmake --help
+          ninja --help
           ls "C:\\Program Files (x86)\\Windows Kits\\10\\Lib"
         shell: bash   
